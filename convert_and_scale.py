@@ -12,7 +12,7 @@ def convert_and_scale(input_folder, output_folder, scale_factor, suffix):
         output_filepath = os.path.join(output_folder, filename)
 
         # Process TIFF images
-        if filename.lower().endswith((".tiff", ".tif")):
+        if filename.lower().endswith((".tiff", ".tif")) or filename.lower().endswith(".bmp"):
             with Image.open(filepath) as img:
                 # Calculate new dimensions
                 new_width = int(img.width / scale_factor)
@@ -25,6 +25,7 @@ def convert_and_scale(input_folder, output_folder, scale_factor, suffix):
                 # Save as JPG
                 output_filename = os.path.splitext(filename)[0] + suffix + ".jpg"
                 resized_img.save(os.path.join(output_folder, output_filename), quality=95)
+                
 
         # Process text files
         elif filename.lower().endswith(".txt"):
